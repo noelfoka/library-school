@@ -33,15 +33,11 @@
 
 # 📖 OOP school library <a name="about-project"></a>
 
-> Describe your project in 1 or 2 sentences.
-
 **OOP school library** is a simple ruby project, starting by create three classes, Person, Student and Teacher are inherents to Person with an extra parameter for each children class.
 
 ## 🛠 Built With <a name="built-with"></a>
 
 ### Tech Stack <a name="tech-stack"></a>
-
-> Describe the tech stack and include only the relevant sections that apply to your project.
 
 <details>
   <summary>Back-End</summary>
@@ -70,8 +66,6 @@
 <!-- GETTING STARTED -->
 
 ## 💻 Getting Started <a name="getting-started"></a>
-
-> Describe how a new developer could make use of your project.
 
 To get a local copy up and running, follow these steps.
 
@@ -104,8 +98,6 @@ Install this project with:
 <!-- AUTHORS -->
 
 ## 👥 Authors <a name="authors"></a>
-
-> Mention all of the collaborators of this project.
 
 👤 **Noel FOKA**
 
