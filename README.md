@@ -40,7 +40,7 @@
 
 > Describe your project in 1 or 2 sentences.
 
-**[your_project__name]** is a...
+**OOP school library** is a simple ruby project, starting by create three classes, Person, Student and Teacher are inherents to Person with an extra parameter for each children class.
 
 ## 🛠 Built With <a name="built-with"></a>
 
