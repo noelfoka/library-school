@@ -1,3 +1,5 @@
+require_relative 'nameable'
+
 class NameDecorator < Nameable
   def initialize(nameable)
     @nameable = nameable
