@@ -1,4 +1,4 @@
-require_relative './decorator.rb'
+require_relative 'decorator'
 
 class CapitalizeDecorator < NameDecorator
   def correct_name
