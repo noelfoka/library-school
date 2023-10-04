@@ -1,3 +1,5 @@
+require_relative './nameable.rb'
+
 class NameDecorator < Nameable
   attr_accessor :nameable
 

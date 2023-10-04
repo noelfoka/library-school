@@ -1,3 +1,5 @@
+require_relative './nameable.rb'
+
 class Person < Nameable
   attr_reader :id
   attr_accessor :name, :age
