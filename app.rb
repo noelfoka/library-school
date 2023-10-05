@@ -36,4 +36,19 @@ class App
     @books << book
     puts '#{book.title} by #{book.author}'
   end
+
+  def create_rentals(person_id, book_title)
+    person = @people.find { |p| p.id == person_id }
+    book = @books.find { |b| b.title == book_title }
+    if peson.nil
+      puts 'person not found'
+      return
+    elsif book.nil
+        puts 'Book not found'
+        return
+    end
+    rental = Rental.new(person, book)
+    @rentals << rental
+    puts 'Rental created'
+  end
 end
