@@ -27,5 +27,7 @@ class App
     else
       puts 'Invalid person type'
     end
+    @people << person
+    puts '#{person.name} (#{person.type}) created'
   end
 end
