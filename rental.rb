@@ -4,11 +4,8 @@ class Rental
   belongs_to :book
   belongs_to :person
 
-  def initialize(date)
+  def initialize(date, book, person)
     @date = date
-  end
-
-  def initialize(book, person)
     super()
     self.book = book
     self.person = person
