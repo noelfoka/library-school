@@ -9,7 +9,7 @@ class App
 
   def list_books
     @books.each do |book|
-        puts "#{book.title} by #{book.author}"
+      puts "#{book.title} by #{book.author}"
     end
   end
 
@@ -19,5 +19,13 @@ class App
     end
   end
 
-  
+  def create_person(name, type)
+    if type == 'teacher'
+      person = Teacher.new(name)
+    elsif type == 'student'
+      person = Student.new(name)
+    else
+      puts 'Invalid person type'
+    end
+  end
 end
