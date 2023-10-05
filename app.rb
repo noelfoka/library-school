@@ -30,4 +30,10 @@ class App
     @people << person
     puts '#{person.name} (#{person.type}) created'
   end
+
+  def create_book(title, author)
+    book = Book.new(title, author)
+    @books << book
+    puts '#{book.title} by #{book.author}'
+  end
 end
