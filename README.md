@@ -2,7 +2,7 @@
 
 <div align="center">
   <!-- You are encouraged to replace this logo with your own! Otherwise you can also remove it. -->
-  <img src="logo.png" alt="logo" width="140"  height="auto" style="border-radius:50%" />
+  <img src="logo.png" alt="logo" width="200"  height="auto" style="border-radius:100%" />
   <br/>
 
   <h3><b>OOP school library</b></h3>
