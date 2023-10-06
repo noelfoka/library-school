@@ -1,7 +1,7 @@
-class App 
+class App
   attr_accessor :books, :people, :rentals
-  
-  def initialize(books, people, rentals)
+
+  def initialize
     @books = []
     @people = []
     @rentals = []
@@ -9,13 +9,13 @@ class App
 
   def list_books
     @books.each do |book|
-      puts '#{book.title} by #{book.author}'
+      puts "#{book.title} by #{book.author}"
     end
   end
 
   def list_people
     @people.each do |person|
-      puts '#{person.name} #{person.type}'
+      puts "#{person.name} #{person.type}"
     end
   end
 
@@ -26,15 +26,16 @@ class App
       person = Student.new(name)
     else
       puts 'Invalid person type'
+      return
     end
     @people << person
-    puts '#{person.name} (#{person.type}) created'
+    puts "#{person.name} (#{person.type}) created"
   end
 
   def create_book(title, author)
     book = Book.new(title, author)
     @books << book
-    puts '#{book.title} by #{book.author}'
+    puts "#{book.title} by #{book.author}"
   end
 
   def create_rentals(person_id, book_title)
@@ -44,11 +45,22 @@ class App
       puts 'person not found'
       return
     elsif book.nil
-        puts 'Book not found'
-        return
+      puts 'Book not found'
+      return
     end
     rental = Rental.new(person, book)
     @rentals << rental
     puts 'Rental created'
+  end
+
+  def list_rentals(person_id)
+    rentals = @rentals.select { |r| r.person.id == person_id }
+    if rentals.empty?
+      puts "No rentals found for person with id #{person_id}"
+      return
+    end
+    rentals.each do |rental|
+      puts "#{rental.book.title} rented on #{rental.date}"
+    end
   end
 end
