@@ -1,4 +1,5 @@
 require_relative 'app'
+require_relative 'option_handler'
 
 def show_options
   puts 'Please choose an option by entering a number:'
@@ -13,35 +14,15 @@ end
 
 def prompt
   puts 'Welcome to the School Library App!'
+  option_handler = OptionHandler.new
+
   loop do
     show_options
     option = gets.chomp.to_i
     break if option == 7
 
-    call_option(option)
+    option_handler.call_option(option)
   end
-end
-
-def call_option(option)
-  case option
-  when 1
-    list_books
-  when 2
-    list_people
-  when 3
-    create_person
-  when 4
-    create_book
-  when 5
-    create_rental
-  when 6
-    list_rentals
-  end
-end
-
-def main
-  app = App.new
-  app.run
 end
 
 main
