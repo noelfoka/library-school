@@ -1,3 +1,5 @@
+require_relative 'app'
+
 class OptionHandler
   def initialize(app)
     @app = app
