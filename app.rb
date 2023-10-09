@@ -14,23 +14,26 @@ class App
     @people = []
   end
 
-  def list_books
-    @books.each { |book| puts "Title: \"#{book.title}\", Author: #{book.author}" }
-  end
-
-  def list_books_with_index
-    @books.each_with_index { |book, i| puts "#{i}) Title: \"#{book.title}\", Author: #{book.author}" }
-  end
-
-  def list_people
-    @people.each do |person|
-      puts "[#{person.class.name}] Name: \"#{person.name}\", ID: #{person.id}, Age: #{person.age}"
+  def list_books(with_index: false)
+    @books.each_with_index do |book, i|
+      output = if with_index
+                 "#{i}) Title: \"#{book.title}\", Author: #{book.author}"
+               else
+                 "Title: \"#{book.title}\", Author: #{book.author}"
+               end
+      puts output
     end
   end
 
-  def list_people_with_index
+  def list_people(with_index: false)
     @people.each_with_index do |person, i|
-      puts "#{i}) [#{person.class.name}] Name: \"#{person.name}\", ID: #{person.id}, Age: #{person.age}"
+      output = if with_index
+                 "#{i}) [#{person.class.name}]
+      Name: \"#{person.name}\", ID: #{person.id}, Age: #{person.age}"
+               else
+                 "[#{person.class.name}] Name: \"#{person.name}\", ID: #{person.id}, Age: #{person.age}"
+               end
+      puts output
     end
   end
 
@@ -98,7 +101,7 @@ class App
 
   def create_rental
     puts 'Select a book from the following list by number'
-    list_books_with_index
+    list_books(with_index: true)
     book_index = gets.chomp.to_i
     unless (0...@books.length).include?(book_index)
       puts "Error adding a record. Book #{book_index} doesn't exist"
@@ -106,7 +109,7 @@ class App
     end
     book = @books[book_index]
     puts "\nSelect a person from the following list by number (not id)"
-    list_people_with_index
+    list_people(with_index: true)
     person_index = gets.chomp.to_i
     unless (0...@people.length).include?(person_index)
       puts "Error adding a record. Person #{person_index} doesn't exist"
