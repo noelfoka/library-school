@@ -105,15 +105,21 @@ Install this project with:
 - Twitter: [@noelnomgne](https://twitter.com/noelnomgne)
 - LinkedIn: [noelfoka](https://linkedin.com/in/noelfoka)
 
+
+👤 **Mohammad Mahdi Niazi**
+- GitHub: [@Mahdi-Niazi](https://github.com/Mahdi-Niazi)
+- Twitter: [@mahdinazi1](https://twitter.com/mahdiniazi1)
+- LinkedIn: [Mohammad Mahdi Niazi](https://www.linkedin.com/in/mohammad-mahdi-niazi/)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- FUTURE FEATURES -->
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] **decorate a class**
-- [ ] **set up associations**
-- [ ] **Add basic UI**
+- [ ] **SOLID Best Practice**
+- [ ] **Preserve Data**
+- [ ] **Unit Tests**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
