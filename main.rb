@@ -1,10 +1,11 @@
 require_relative 'app'
 require_relative 'option_handler'
-require_relative 'option'
+require_relative 'options'
 
 def prompt
   puts 'Welcome to the School Library App!'
-  option_handler = OptionHandler.new
+  app = App.new
+  option_handler = OptionHandler.new(app)
   options = ShowOptions.new
 
   loop do
@@ -16,4 +17,4 @@ def prompt
   end
 end
 
-main
+prompt
