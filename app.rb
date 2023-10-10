@@ -15,12 +15,9 @@ class App
     @people = []
 
     @data_manager = DataManager.new
-    load_data
-  end
-
-  def load_data
     @data_manager.load_data
     @books = @data_manager.books
+    @people = @data_manager.people
   end
 
   def save_data
@@ -62,6 +59,7 @@ class App
     else
       puts "Invalid choice. Please enter a valid option. (#{student_or_teacher})"
     end
+    
   end
 
   def create_student
@@ -85,6 +83,9 @@ class App
 
     @people.push(student)
     puts 'Person created successfully'
+
+     @data_manager.people = @people
+  @data_manager.save_people
   end
 
   def create_teacher
@@ -100,6 +101,9 @@ class App
     teacher = Teacher.new(specialization, age, name)
     @people.push(teacher)
     puts 'Person created successfully'
+
+     @data_manager.people = @people
+  @data_manager.save_people
   end
 
   def create_book
@@ -112,7 +116,7 @@ class App
     @books.push(Book.new(title, author))
     puts 'Book created successfully'
 
-    save_data
+    @data_manager.save_books
   end
 
   def create_rental
