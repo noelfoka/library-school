@@ -14,7 +14,7 @@ class App
     @rentals = []
     @people = []
 
-    @data_manager = DataMangaer.new
+    @data_manager = DataManager.new
     load_data
   end
 
