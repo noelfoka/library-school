@@ -1,6 +1,6 @@
 require 'json'
 
-class DataMangaer
+class DataManager
     attr_accessor :books, :rentals, :people
 
     def initialize
