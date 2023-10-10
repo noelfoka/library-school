@@ -136,6 +136,8 @@ class App
     date = gets.chomp.to_s
     @rentals.push(Rental.new(date, book, person))
     puts 'Rental created successfully'
+    @data_manager.rentals = @rentals
+    @data_manager.save_rentals
   end
 
   def list_rentals
