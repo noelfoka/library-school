@@ -77,9 +77,24 @@ class App
 
     @books.push(Book.new(title, author))
     puts 'Book created successfully'
+
+    @data_manager.save_books
   end
 
   def create_rental
+    book = select_book
+    return unless book
+
+    person = select_person
+    return unless person
+
+    print 'Date: '
+    date = gets.chomp.to_s
+
+    create_and_save_rental(date, book, person)
+  end
+
+  def select_book
     puts 'Select a book from the following list by number'
     list_books_with_index
     book_index = gets.chomp.to_i
@@ -87,7 +102,10 @@ class App
       puts "Error adding a record. Book #{book_index} doesn't exist"
       return
     end
-    book = @books[book_index]
+    @books[book_index]
+  end
+
+  def select_person
     puts "\nSelect a person from the following list by number (not id)"
     list_people_with_index
     person_index = gets.chomp.to_i
@@ -95,11 +113,15 @@ class App
       puts "Error adding a record. Person #{person_index} doesn't exist"
       return
     end
-    person = @people[person_index]
-    print 'Date: '
-    date = gets.chomp.to_s
+    @people[person_index]
+  end
+
+  def create_and_save_rental(date, book, person)
     @rentals.push(Rental.new(date, book, person))
     puts 'Rental created successfully'
+
+    @data_manager.rentals = @rentals
+    @data_manager.save_rentals
   end
 
   def list_rentals
