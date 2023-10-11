@@ -8,7 +8,7 @@ require_relative 'person'
 describe Book do
   let(:book) { Book.new('Title', 'Author') }
   let(:person) { Person.new('Mahdi', 25) }
-  let(:date) {Date.new(2023, 10, 11)}
+  let(:date) { Date.new(2023, 10, 11) }
 
   context 'Initialization' do
     it 'should initialize with a title' do
