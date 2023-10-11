@@ -4,7 +4,6 @@ require_relative 'person'
 require_relative 'rental'
 require_relative 'student'
 require_relative 'teacher'
-require_relative 'data_manager'
 
 class App
   attr_accessor :books, :people, :rentals
@@ -13,38 +12,25 @@ class App
     @books = []
     @rentals = []
     @people = []
-
-    @data_manager = DataManager.new
-    @data_manager.load_data
-    @books = @data_manager.books
-    @people = @data_manager.people
   end
 
-  def save_data
-    @data_manager.save_books
-    puts 'Book Save Successfully!'
+  def list_books
+    @books.each { |book| puts "Title: \"#{book.title}\", Author: #{book.author}" }
   end
 
-  def list_books(with_index: false)
-    @books.each_with_index do |book, i|
-      output = if with_index
-                 "#{i}) Title: \"#{book.title}\", Author: #{book.author}"
-               else
-                 "Title: \"#{book.title}\", Author: #{book.author}"
-               end
-      puts output
+  def list_books_with_index
+    @books.each_with_index { |book, i| puts "#{i}) Title: \"#{book.title}\", Author: #{book.author}" }
+  end
+
+  def list_people
+    @people.each do |person|
+      puts "[#{person.class.name}] Name: \"#{person.name}\", ID: #{person.id}, Age: #{person.age}"
     end
   end
 
-  def list_people(with_index: false)
+  def list_people_with_index
     @people.each_with_index do |person, i|
-      output = if with_index
-                 "#{i}) [#{person.class.name}]
-      Name: \"#{person.name}\", ID: #{person.id}, Age: #{person.age}"
-               else
-                 "[#{person.class.name}] Name: \"#{person.name}\", ID: #{person.id}, Age: #{person.age}"
-               end
-      puts output
+      puts "#{i}) [#{person.class.name}] Name: \"#{person.name}\", ID: #{person.id}, Age: #{person.age}"
     end
   end
 
@@ -80,13 +66,11 @@ class App
 
     @books.push(Book.new(title, author))
     puts 'Book created successfully'
-
-    @data_manager.save_books
   end
 
   def create_rental
     puts 'Select a book from the following list by number'
-    list_books(with_index: true)
+    list_books_with_index
     book_index = gets.chomp.to_i
     unless (0...@books.length).include?(book_index)
       puts "Error adding a record. Book #{book_index} doesn't exist"
@@ -94,7 +78,7 @@ class App
     end
     book = @books[book_index]
     puts "\nSelect a person from the following list by number (not id)"
-    list_people(with_index: true)
+    list_people_with_index
     person_index = gets.chomp.to_i
     unless (0...@people.length).include?(person_index)
       puts "Error adding a record. Person #{person_index} doesn't exist"
@@ -105,8 +89,6 @@ class App
     date = gets.chomp.to_s
     @rentals.push(Rental.new(date, book, person))
     puts 'Rental created successfully'
-    @data_manager.rentals = @rentals
-    @data_manager.save_rentals
   end
 
   def list_rentals
@@ -123,5 +105,6 @@ class App
 
   def run
     prompt
+    save_data
   end
 end
