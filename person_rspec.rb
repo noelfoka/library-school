@@ -7,13 +7,13 @@ require_relative 'rental'
 describe Person do
   let(:person) { Person.new(18, 'Noel') }
 
-  context '#add_rental' do
+  context '#add_rentals' do
     it 'adds a new rental to the rental list of a person' do
       person = Person.new(25)
       book = Book.new('Book 1', 'Author 1')
       date = Date.today
 
-      person.add_rental(book, date)
+      person.add_rentals(book, date)
 
       expect(person.rentals).to include(Rental.new(date, book, person))
     end

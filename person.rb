@@ -1,4 +1,6 @@
 require_relative 'nameable'
+require_relative 'capitalize_decorator'
+require_relative 'trimer_decorator'
 
 class Person < Nameable
   attr_reader :id, :specialization
