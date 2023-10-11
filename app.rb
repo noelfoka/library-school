@@ -49,63 +49,28 @@ class App
   end
 
   def create_person
-    print 'Do you want to create a student (1) or a teacher (2)? [input the number]: '
-    student_or_teacher = gets.chomp.to_i
-    case student_or_teacher
-    when 1
-      create_student
-    when 2
-      create_teacher
-    else
-      puts "Invalid choice. Please enter a valid option. (#{student_or_teacher})"
-    end
-    
-  end
-
-  def create_student
+    print 'Do you want to create a Student (1) or a Teacher (2)? [Input the number]: '
+    option = gets.chomp
     print 'Age: '
-    age = gets.chomp.to_i
-
+    age = gets.chomp
     print 'Name: '
-    name = gets.chomp.to_s
-
-    print 'Has parent permission? [Y / N]: '
-    parent_permission = gets.chomp.to_s
-
-    if parent_permission =~ /^[Yy]/
-      student = Student.new('Unknown', age, name, parent_permission: true)
-    elsif parent_permission =~ /^[Nn]/
-      student = Student.new('Unknown', age, name, parent_permission: false)
-    else
-      puts "Invalid choice. Please enter a valid option. (#{parent_permission})"
-      return
+    name = gets.chomp
+    case option
+    when '1'
+      print 'Has parent permission? [Y/N]: '
+      permission = gets.chomp.downcase
+      @people << Student.new(age, name, parent_permission: (permission == 'y'))
+    when '2'
+      print 'Specialization: '
+      specialization = gets.chomp
+      @people << Teacher.new(age, specialization, name)
     end
+    puts 'Person Created Successfully'
 
-    @people.push(student)
-    puts 'Person created successfully'
-
-     @data_manager.people = @people
-  @data_manager.save_people
+    @data_manager.people = @people
+    @data_manager.save_people
   end
-
-  def create_teacher
-    print 'Age: '
-    age = gets.chomp.to_i
-
-    print 'Name: '
-    name = gets.chomp.to_s
-
-    print 'Specialization: '
-    specialization = gets.chomp.to_s
-
-    teacher = Teacher.new(specialization, age, name)
-    @people.push(teacher)
-    puts 'Person created successfully'
-
-     @data_manager.people = @people
-  @data_manager.save_people
-  end
-
+  
   def create_book
     print 'Title: '
     title = gets.chomp.to_s

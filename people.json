@@ -1,1 +1,1 @@
-[{"type":"Student","age":"Unknown","name":"mahdi","parent_permision":true}]
+[{"type":"Student","age":"23","name":null,"parent_permision":true,"specialization":null},{"type":"Teacher","age":"34","name":"Karem","parent_permision":true,"specialization":"doctor"},{"type":"Student","age":"44","name":"Unknown","parent_permision":true,"specialization":null}]
