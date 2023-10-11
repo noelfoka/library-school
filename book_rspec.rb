@@ -45,8 +45,8 @@ describe Book do
     it 'should create a new Rental object' do
       rental = book.add_rental(person, date)
       expect(rental).to be_an_instance_of(Rental)
-      expect(rental.book).to eq(Book)
-      expect(rental.person).to eq(Person)
+      expect(rental.book).to eq(book)
+      expect(rental.person).to eq(person)
     end
   end
 end
