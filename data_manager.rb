@@ -59,7 +59,7 @@ class DataManager
   def save_people
     File.open('people.json', 'w') do |file|
       file.puts @people.map { |person|
-                 {
+                  {
                     'type' => person.class.name,
                     'age' => person.age,
                     'name' => person.name,
@@ -108,7 +108,7 @@ class DataManager
                  Student.new(rental_data['person']['age'].to_i, rental_data['person']['name'],
                              parent_permission: rental_data['person']['parent_permission'])
                when 'Teacher'
-                 Teacher.new(rental_data['person']['age'].to_i, rental_data['person']['specialization'], 
+                 Teacher.new(rental_data['person']['age'].to_i, rental_data['person']['specialization'],
                              rental_data['person']['name'])
                end
       Rental.new(rental_data['date'], book, person)

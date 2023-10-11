@@ -67,7 +67,7 @@ class App
     @data_manager.people = @people
     @data_manager.save_people
   end
-  
+
   def create_book
     print 'Title: '
     title = gets.chomp.to_s
