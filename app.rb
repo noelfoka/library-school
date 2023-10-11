@@ -4,6 +4,7 @@ require_relative 'person'
 require_relative 'rental'
 require_relative 'student'
 require_relative 'teacher'
+require_relative 'data_manager'
 
 class App
   attr_accessor :books, :people, :rentals
@@ -12,6 +13,16 @@ class App
     @books = []
     @rentals = []
     @people = []
+
+    @data_manager = DataManager.new
+    @data_manager.load_data
+    @books = @data_manager.books
+    @people = @data_manager.people
+  end
+
+  def save_data
+    @data_manager.save_books
+    puts 'Book Save Successfully!'
   end
 
   def list_books
