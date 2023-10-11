@@ -4,6 +4,7 @@ require_relative 'person'
 require_relative 'rental'
 require_relative 'student'
 require_relative 'teacher'
+require_relative 'data_manager'
 
 class App
   attr_accessor :books, :people, :rentals
@@ -12,80 +13,59 @@ class App
     @books = []
     @rentals = []
     @people = []
+
+    @data_manager = DataManager.new
+    @data_manager.load_data
+    @books = @data_manager.books
+    @people = @data_manager.people
   end
 
-  def list_books(with_index: false)
-    @books.each_with_index do |book, i|
-      output = if with_index
-                 "#{i}) Title: \"#{book.title}\", Author: #{book.author}"
-               else
-                 "Title: \"#{book.title}\", Author: #{book.author}"
-               end
-      puts output
+  def save_data
+    @data_manager.save_books
+    puts 'Book Save Successfully!'
+  end
+
+  def list_books
+    @books.each { |book| puts "Title: \"#{book.title}\", Author: #{book.author}" }
+  end
+
+  def list_books_with_index
+    @books.each_with_index { |book, i| puts "#{i}) Title: \"#{book.title}\", Author: #{book.author}" }
+  end
+
+  def list_people
+    @people.each do |person|
+      puts "[#{person.class.name}] Name: \"#{person.name}\", ID: #{person.id}, Age: #{person.age}"
     end
   end
 
-  def list_people(with_index: false)
+  def list_people_with_index
     @people.each_with_index do |person, i|
-      output = if with_index
-                 "#{i}) [#{person.class.name}]
-      Name: \"#{person.name}\", ID: #{person.id}, Age: #{person.age}"
-               else
-                 "[#{person.class.name}] Name: \"#{person.name}\", ID: #{person.id}, Age: #{person.age}"
-               end
-      puts output
+      puts "#{i}) [#{person.class.name}] Name: \"#{person.name}\", ID: #{person.id}, Age: #{person.age}"
     end
   end
 
   def create_person
-    print 'Do you want to create a student (1) or a teacher (2)? [input the number]: '
-    student_or_teacher = gets.chomp.to_i
-    case student_or_teacher
-    when 1
-      create_student
-    when 2
-      create_teacher
-    else
-      puts "Invalid choice. Please enter a valid option. (#{student_or_teacher})"
-    end
-  end
-
-  def create_student
+    print 'Do you want to create a Student (1) or a Teacher (2)? [Input the number]: '
+    option = gets.chomp
     print 'Age: '
-    age = gets.chomp.to_i
-
+    age = gets.chomp
     print 'Name: '
-    name = gets.chomp.to_s
-
-    print 'Has parent permission? [Y / N]: '
-    parent_permission = gets.chomp.to_s
-
-    if parent_permission =~ /^[Yy]/
-      student = Student.new('Unknown', age, name, parent_permission: true)
-    elsif parent_permission =~ /^[Nn]/
-      student = Student.new('Unknown', age, name, parent_permission: false)
-    else
-      puts "Invalid choice. Please enter a valid option. (#{parent_permission})"
-      return
+    name = gets.chomp
+    case option
+    when '1'
+      print 'Has parent permission? [Y/N]: '
+      permission = gets.chomp.downcase
+      @people << Student.new(age, name, parent_permission: (permission == 'y'))
+    when '2'
+      print 'Specialization: '
+      specialization = gets.chomp
+      @people << Teacher.new(age, specialization, name)
     end
+    puts 'Person Created Successfully'
 
-    @people.push(student)
-    puts 'Person created successfully'
-  end
-
-  def create_teacher
-    print 'Age: '
-    age = gets.chomp.to_i
-
-    print 'Name: '
-    name = gets.chomp.to_s
-
-    print 'Specialization: '
-    specialization = gets.chomp.to_s
-
-    teacher = Teacher.new(specialization, age, name)
-    @people.push(teacher)
-    puts 'Person created successfully'
+    @data_manager.people = @people
+    @data_manager.save_people
   end
 
   def create_book
@@ -97,29 +77,51 @@ class App
 
     @books.push(Book.new(title, author))
     puts 'Book created successfully'
+
+    @data_manager.save_books
   end
 
   def create_rental
+    book = select_book
+    return unless book
+
+    person = select_person
+    return unless person
+
+    print 'Date: '
+    date = gets.chomp.to_s
+
+    create_and_save_rental(date, book, person)
+  end
+
+  def select_book
     puts 'Select a book from the following list by number'
-    list_books(with_index: true)
+    list_books_with_index
     book_index = gets.chomp.to_i
     unless (0...@books.length).include?(book_index)
       puts "Error adding a record. Book #{book_index} doesn't exist"
       return
     end
-    book = @books[book_index]
+    @books[book_index]
+  end
+
+  def select_person
     puts "\nSelect a person from the following list by number (not id)"
-    list_people(with_index: true)
+    list_people_with_index
     person_index = gets.chomp.to_i
     unless (0...@people.length).include?(person_index)
       puts "Error adding a record. Person #{person_index} doesn't exist"
       return
     end
-    person = @people[person_index]
-    print 'Date: '
-    date = gets.chomp.to_s
+    @people[person_index]
+  end
+
+  def create_and_save_rental(date, book, person)
     @rentals.push(Rental.new(date, book, person))
     puts 'Rental created successfully'
+
+    @data_manager.rentals = @rentals
+    @data_manager.save_rentals
   end
 
   def list_rentals
@@ -136,5 +138,6 @@ class App
 
   def run
     prompt
+    save_data
   end
 end
