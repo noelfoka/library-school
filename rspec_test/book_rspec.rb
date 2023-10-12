@@ -1,9 +1,9 @@
 require 'rspec'
 require 'date'
 
-require_relative 'book'
-require_relative 'rental'
-require_relative 'person'
+require_relative '../book'
+require_relative '../rental'
+require_relative '../person'
 
 describe Book do
   let(:book) { Book.new('Title', 'Author') }

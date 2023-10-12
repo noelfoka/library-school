@@ -1,5 +1,5 @@
 require 'rspec'
-require_relative 'teacher'
+require_relative '../teacher'
 
 describe Teacher do
   let(:teacher) { Teacher.new('Math', 40) }
