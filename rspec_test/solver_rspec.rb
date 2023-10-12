@@ -34,4 +34,6 @@ describe Solver do
             expect(reverse('a')).to eq('a')
         end
     end
+    #add your code for the fizzbuzz
+    
 end
