@@ -17,7 +17,7 @@ describe Solver do
             expect(solver.factorial(10)).to eq(3628800)
         end
         it 'riases an error when a negative number is passed' do 
-            expect {solver.factorial(-1)}. to raise_error(ArgumentError, 'Argument must be a non-negative integer')
+            expect {solver.factorial(-1)}. to raise_error(ArgumentError, 'N must be a non-negatve integer')
         end
     end
 
@@ -46,7 +46,7 @@ describe Solver do
         end
         it 'returns "fizzbuzz" for numbers divisible by 3 and 5' do
             expect(solver.fizzbuzz(15)).to eq('fizzbuzz')
-            expect(solver.fizzbuzz(30)).to eq('fizzbuss')
+            expect(solver.fizzbuzz(30)).to eq('fizzbuzz')
         end
     end 
 end
