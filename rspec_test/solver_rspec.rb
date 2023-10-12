@@ -34,6 +34,20 @@ describe Solver do
             expect(reverse('a')).to eq('a')
         end
     end
-    #add your code for the fizzbuzz
+
+    describe '#fizzbuzz' do
+        it 'returns "fizz" for numbers divisible by 3' do
+            expect(fizzbuzz(3)).to eq('fizz')
+            expect(fizzbuzz(6)).to eq('fizz')
+        end
+        it 'returns "buzz" for numbers divisible by 5' do
+            expect(fizzbuzz(5)).to eq('buzz')
+            expect(fizzbuzz(10)).to eq('buzz')
+        end
+        it 'returns "fizzbuzz" for numbers divisible by 3 and 5' do
+            expect(fizzbuzz(15)).to eq('fizzbuzz')
+            expect(fizzbuzz(30)).to eq('fizzbuss')
+        end
+    end
     
 end
