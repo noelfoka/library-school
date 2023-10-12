@@ -14,4 +14,18 @@ class Solver
         end
         reversed_word
     end
+    
+    def fizzbuzz(n)
+    result = ''
+    if n % 3 == 0
+      result += 'fizz'
+    end
+    if n % 5 == 0
+      result += 'buzz'
+    end
+    if result == ''
+      result = n.to_s
+    end
+    result
+  end
 end
